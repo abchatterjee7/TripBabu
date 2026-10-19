@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/static/logo.png" type="image/png">
+  <title>TripBabu AI</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="page-bg">
+    <div class="gradient-circle circle-1"></div>
+    <div class="gradient-circle circle-2"></div>
+    <div class="gradient-circle circle-3"></div>
+  </div>
+
+  <main class="app-container">
+    <section class="hero-section">
+      <div class="badge">
+        ✈️ TripBabu AI · Your personal travel planner
+      </div>
+      <h1>Plan a trip that feels like yours</h1>
+      <p>
+        Explore flight options, find places to stay, check the weather, and shape
+        your budget. Review your itinerary draft before it is finalized.
+      </p>
+    </section>
+
+    <section class="planner-card">
+      <div class="card-header">
+        <div>
+          <h2>Where would you like to go?</h2>
+          <p>
+            Try: Plan a 7-day Australia trip from India within a ₹2 lakh budget.
+          </p>
+        </div>
+        <div class="status-pill">
+          <span class="status-dot"></span>
+          Ready to plan
+        </div>
+      </div>
+
+      <div class="input-area">
+        <textarea
+          id="userInput"
+          placeholder="Plan a 7-day Australia trip from India, with flights, stays, and sightseeing, within ₹2 lakh..."
+        ></textarea>
+        <button id="sendBtn" onclick="sendMessage()">
+          <span id="btnText">Build my trip draft</span>
+          <span id="btnLoader" class="loader hidden"></span>
+        </button>
+      </div>
+
+      <div class="quick-prompts">
+        <button onclick="setPrompt('Plan a 7-day Australia trip from India, including flights, stays, and sightseeing, within a 2 lakh rupee budget.')">
+          Australia Trip
+        </button>
+        <button onclick="setPrompt('Plan a 5-day London trip from Hyderabad with flight options, accommodation, and sightseeing.')">
+          London Trip
+        </button>
+        <button onclick="setPrompt('Plan a 7-day Switzerland trip from India with affordable stays and sightseeing.')">
+          Switzerland Trip
+        </button>
+        <button onclick="setPrompt('Show me flight information for destinations around the world.')">
+          Global Flights
+        </button>
+      </div>
+    </section>
+
+    <section id="workflowSection" class="workflow-section hidden">
+      <div class="workflow-header">
+        <div>
+          <span class="eyebrow">Your planning assistant</span>
+          <h2>Trip planning steps</h2>
+        </div>
+        <span id="guardrailBadge" class="guardrail-badge">Request checked</span>
+      </div>
+      <p id="supervisorReasoning" class="supervisor-reasoning"></p>
+      <div id="agentChips" class="agent-chips"></div>
+    </section>
+
+    <section id="resultSection" class="result-section hidden">
+      <div class="result-header">
+        <div>
+          <h2 id="resultTitle">Your trip itinerary</h2>
+          <p id="threadInfo">Plan reference: -</p>
+        </div>
+        <div class="result-actions">
+          <button class="copy-btn" onclick="copyResult()">Copy plan</button>
+          <button class="download-btn" onclick="downloadPDF()">Save as PDF</button>
+        </div>
+      </div>
+
+      <div id="pdfContent" class="pdf-content">
+        <h1 class="pdf-title">Your trip itinerary</h1>
+        <div id="resultBox" class="result-box"></div>
+      </div>
+    </section>
+
+    <section id="approvalSection" class="approval-section hidden">
+      <div class="approval-icon">👤</div>
+      <div class="approval-content">
+        <span class="eyebrow">Your review</span>
+        <h2>Take a look at your trip draft</h2>
+        <p id="approvalRequest">
+          Approve this draft to finalize your itinerary, or tell us what you would like to change.
+        </p>
+
+        <textarea
+          id="approvalFeedback"
+          class="feedback-input"
+          placeholder="What should we change? For example: lower the hotel budget or add a free day..."
+        ></textarea>
+
+        <div class="approval-actions">
+          <button id="approveBtn" class="approve-btn" onclick="submitApproval(true)">
+            Approve & Finalize
+          </button>
+          <button id="reviseBtn" class="revise-btn" onclick="submitApproval(false)">
+            Request Changes
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="errorBox" class="error-box hidden"></section>
+  </main>
+
+  <footer>
+    Powered by FastAPI, LangGraph, Groq, PostgreSQL, Tavily, AviationStack, and MCP
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="/static/script.js"></script>
+</body>
+</html>
