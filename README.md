@@ -6,20 +6,20 @@ A demo multi-agent system that uses LangGraph and MCP to implement a travel-plan
 input Guardrails, and Human-In-The-Loop (HITL) approval flows. The project includes a FastAPI frontend, example MCP server,
 and client helpers to demonstrate how agents, supervisors, and guardrails can be composed into a safe, reviewable planning pipeline.
 
-Key ideas:
+### Key ideas:
 - Multi-agent coordination using LangGraph and MCP
 - Supervisor agent to manage complex workflows
 - Input guardrails to validate user requests
 - Human-in-the-loop approval for generated plans
 
-Contents
+### Contents
 - `app.py`: FastAPI web frontend and API endpoints
 - `backend.py`: core agent orchestration / travel-planner logic
 - `mcp_client.py`: client helpers to interact with the MCP server
 - `custom_weather_mcp_server.py`: example MCP server for weather checks
 - `templates/`, `static/`: frontend UI assets (HTML, JS, CSS)
 
-Features
+### Features
 - Interactive web UI for sending travel planning prompts
 - Endpoint for drafting travel plans and separate approval endpoint
 - Example MCP server demonstrating domain adapters (weather, checkpoints)
@@ -29,7 +29,7 @@ Prerequisites
 - Git (to clone the repo)
 - A virtual environment tool (venv) or similar
 
-Quick start (Windows)
+### Quick start (Windows)
 
 1. Create and activate a virtual environment
 
@@ -58,7 +58,7 @@ uvicorn app:app --reload --host 127.0.0.1 --port 8000
 
 Visit http://127.0.0.1:8000 in your browser to use the TripBabu frontend.
 
-Running the MCP server (example)
+#### Running the MCP server (example)
 - The repository includes `custom_weather_mcp_server.py` as an example MCP server. Run it in a separate terminal if you want to experiment with custom adapters used by the demo.
 
 ```powershell
@@ -66,26 +66,33 @@ Running the MCP server (example)
 python custom_weather_mcp_server.py
 ```
 
-API Endpoints
+#### API Endpoints
 - `POST /api/travel` — create or resume a travel planning thread. JSON: `{ "message": "<user prompt>", "thread_id": "optional-thread-id" }`
 - `POST /api/travel/approve` — approve or request revisions for a draft. JSON: `{ "thread_id": "<id>", "approved": true|false, "feedback": "optional" }`
 - `GET /health` — basic health check and features list
 
-Configuration & environment
+#### Configuration & environment
 - Secrets and API keys are not included in the repo. Use environment variables or a `.env` file for any required keys consumed by `langgraph`, `langchain`, or other adapters.
 
-Development notes
+#### Development notes
 - The project keeps synchronous convenience wrappers in `backend.py` while running an async FastAPI server — `nest_asyncio` is applied in `app.py` to allow the sync helpers to call async MCP helpers.
 - Tests are not included; to experiment, interact with the web UI or call the API endpoints directly.
 
-Contributing
+#### Contributing
 - Contributions are welcome. Please open issues or pull requests for bug fixes, documentation improvements, or new adapter examples.
 
-License
+#### License
 - This repository follows the license in the `LICENSE` file.
 
-Acknowledgements
+#### Acknowledgements
 - Built as a demonstration of LangGraph + MCP patterns with supervisor and guardrail concepts.
 
-Contact
+#### Contact
 - For questions or suggestions, open an issue or contact the repository owner.
+
+#### How it looks
+- when we open localhost:8000 in browser
+![](screenshots/1.png)
+
+- when it gives output to user
+![](screenshots/2.png)
