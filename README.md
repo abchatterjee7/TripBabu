@@ -100,3 +100,6 @@ python custom_weather_mcp_server.py
 
 - when it gives output to user
 ![](screenshots/2.png)
+
+- How traces looks in Langsmith
+![](screenshots/3.png)
