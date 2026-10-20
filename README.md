@@ -6,6 +6,10 @@ A demo multi-agent system that uses LangGraph and MCP to implement a travel-plan
 input Guardrails, and Human-In-The-Loop (HITL) approval flows. The project includes a FastAPI frontend, example MCP server,
 and client helpers to demonstrate how agents, supervisors, and guardrails can be composed into a safe, reviewable planning pipeline.
 
+- Diagram
+
+![](screenshots/diagram.png)
+
 ### Key ideas:
 - Multi-agent coordination using LangGraph and MCP
 - Supervisor agent to manage complex workflows
